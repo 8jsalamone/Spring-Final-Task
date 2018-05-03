@@ -10,38 +10,55 @@ const Task = new importTask();
 
 //function should return a totalValue and totalTime variable wrapped in an object
 function totals(list){
-
     let totalValue = 0;
     let totalTime = 0;
 
-    for(){
-
+    for(let a = 0; a < list.length; a++){
+      totalValue = list[a].value + totalValue;
+      totalTime = list[a].time + totalTime;
     }
 
     return {
-
-    }
+      totalValue:totalValue,
+      totalTime:totalTime
+    };
 }
 
 //works the the same as above, but stops short at the kth number in the list
 function partialTotals(list,k){
+  let totalValue = 0;
+  let totalTime = 0;
 
+  if(k < list.length){
+    for(let a = 0; a < k; a++){
+      totalValue = list[a].value + totalValue;
+      totalTime = list[a].time + totalTime;
+  }
 
-
+  return {
+    totalValue:totalValue,
+    totalTime:totalTime
+    };
+  }
 }
 
 //returns a sorted version of the task list from least to greatest according to its time variable
 function sortTime(list){
 
+
     //provide the criteria to sort the tasks.  They are objects remember.
-    return list.sort(/*fill this*/);
+    return list.sort(function(a,b) {
+        a.time-b.time
+    });
 
 }
 
 //returns a sorted version of the task list from least to greatest according to its value variable
 function sortValue(list){
 
-
+    return list.sort(function(a,b) {
+        a.value-b.value
+    });
 }
 
 //returns a sorted version of the task list from least to greatest according to its impact
@@ -49,11 +66,13 @@ function sortImpact(list){
 
     //create a function which returns the impact of a given task
     function impact(task){
-
+        return (1/task.time) * task.value;
     }
 
     //finishes the sort
-    return list.sort(/*fill this*/);
+    return list.sort(function(a,b) {
+        impact(a)-impact(b);
+    });
 
 }
 
